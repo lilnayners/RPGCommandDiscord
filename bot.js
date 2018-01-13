@@ -63,7 +63,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 });
             break;
             case 'name':
-              console.info(args)
               if(args[0] === 'dwarf') {
                 if(args[1] === 'male') {
                   bot.sendMessage({
