@@ -4,7 +4,7 @@ var logger = require('winston');
 var auth = require('./auth.json');
 var d20 = require('d20');
 var Foswig = require('foswig');
-// Configure logger settings
+
 
 var dwarfMaleChain = new Foswig(1);
 var dwarfMaleNames = ["Dolgrin", "Grunyar", "Harsk", "Kazmuk", "Morgrym", "Rogar"]
@@ -14,6 +14,15 @@ var dwarfFemaleChain = new Foswig(1);
 var dwarfFemaleNames = [ "Agna", "Bodill", "Ingra", "Kotri", "Rusilka", "Yangrit"]
 dwarfFemaleChain.addWordsToChain(dwarfFemaleNames);
 
+var elfMaleChain = new Foswig(1);
+var elfMaleNames = [ "Caladrel", "Heldalel", "Lanliss", "Meirdrarel", "Seldlon", "Talathel", "Variel", "Zordlon"]
+elfMaleChain.addWordsToChain(elfMaleNames);
+
+var elfFemaleChain = new Foswig(1);
+var elfFemaleNames = [ "Amrunelara", "Dardlara", "Faunra", "Jathal", "Merisiel", "Oparal", "Soumral", "Tessara", "Yalandlara"]
+elfFemaleChain.addWordsToChain(elfFemaleNames);
+
+// Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
     colorize: true
@@ -69,9 +78,21 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
 
 
-              }
+              } else if(args[0] === 'elf') {
+                if(args[1] === 'male') {
+                  bot.sendMessage({
+                    to: channelID,
+                    message: `Randomly generated elf name: ${elfMaleChain.generateWord(5,15,true)}`
+                  })
+                } else if(args[1] === 'female')  {
+                  bot.sendMessage({
+                    to: channelID,
+                    message: `Randomly generated elf name: ${elfFemaleChain.generateWord(5,15,true)}`
+                  })
+                }
 
             // Just add any case commands if you want to..
          }
      }
+   }
 });
