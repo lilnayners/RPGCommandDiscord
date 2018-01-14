@@ -22,6 +22,8 @@ var elfFemaleChain = new Foswig(1);
 var elfFemaleNames = [ "Amrunelara", "Dardlara", "Faunra", "Jathal", "Merisiel", "Oparal", "Soumral", "Tessara", "Yalandlara"]
 elfFemaleChain.addWordsToChain(elfFemaleNames);
 
+var helpList = ["roll", "name", "treasure"];
+
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -97,7 +99,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             to: channelID,
             message: `Congratuations! You found ${Math.floor(Math.random() * Math.floor(100)) } gp`
           });
-     }
-
-   }
+          break;
+          case 'help' :
+            //if (args[0] === "") {
+              bot.sendMessage({
+                to:channelID,
+                message: `Here is a list of this bot's commands:\n• ${helpList.join("\n" + "• ") }`
+              });
+            //}
+          }
+        }
 });
